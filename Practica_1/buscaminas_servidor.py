@@ -61,6 +61,7 @@ def realizar_tiro(tablero, columna, fila):
         return "S-8"
     else:
         tablero[fila-1][columna-1] = "o"
+        imprimir_tablero(tablero)
         print(f"Casilla liberada ({columna},{fila})")
         return "S-9"
 
@@ -84,7 +85,7 @@ def recibir_cliente(Client_conn, Client_add):
                 Client_conn.sendall(b"S-6") # Listo para recibir tiros
                 tiros_ganar = (tam * tam) - num_minas
             else:
-                coordenadas = data.split(',') # Lista con coordenadas
+                coordenadas = data# Lista con coordenadas
                 columna = ord(coordenadas[0].upper()) - ord('A') + 1
                 fila = int(coordenadas[1])
                 print(f"Coordenadas de tiro: ({fila}, {columna})")
