@@ -53,17 +53,17 @@ def generar_tablero(dificultad):
     return tablero, size, minas_colocadas
 
 def realizar_tiro(tablero, columna, fila):
-    if tablero[fila-1][columna-1] == "*":
-        print("Mina pisada")
-        return "S-7"
-    elif tablero[fila-1][columna-1] == "o":
-        print(f"Casilla ya liberada ({columna},{fila})")
-        return "S-8"
-    else:
-        tablero[fila-1][columna-1] = "o"
-        imprimir_tablero(tablero)
-        print(f"Casilla liberada ({columna},{fila})")
-        return "S-9"
+    try:
+        if tablero[fila - 1][columna - 1] == "*":
+            return "S-7"  # Mina pisada
+        elif tablero[fila - 1][columna - 1] == "o":
+            return "S-8"  # Casilla ya liberada
+        else:
+            tablero[fila - 1][columna - 1] = "o"
+            return "S-9"  # Casilla liberada
+    except IndexError:
+        return "S-11"  # Código para error de coordenadas fuera del tablero
+
 
 def recibir_cliente(Client_conn, Client_add):
     cont = 0
@@ -115,6 +115,6 @@ def iniciar_server(host, port):
 # host = input("Ingresa la IP: ")
 # port = int(input("Ingresa el puerto: "))
 host = "localhost"
-port = 65432
+port = 65430
 iniciar_server(host, port)
 print("Server acabo")
